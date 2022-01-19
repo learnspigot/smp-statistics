@@ -1,6 +1,9 @@
 package com.bungoh.smpstatistics.placeholders;
 
+import com.google.common.base.Enums;
+import com.google.common.base.Optional;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
@@ -29,21 +32,20 @@ public class SMPStatsExpansion extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String placeholder) {
-        if (placeholder.equalsIgnoreCase("kills_player")) {
-            return getTopPlayer(Statistic.PLAYER_KILLS).getKey().getName();
+
+        String formattedPlaceholder = null;
+
+        if (placeholder.contains("_player")) {
+            formattedPlaceholder = StringUtils.substringBefore(placeholder, "_player");
+            return getTopPlayer(convertToStatistic(formattedPlaceholder)).getKey().getName();
         }
 
-        if (placeholder.equalsIgnoreCase("deaths_player")) {
-            return getTopPlayer(Statistic.DEATHS).getKey().getName();
+        if (placeholder.contains("_amt")) {
+            formattedPlaceholder = StringUtils.substringBefore(placeholder, "_amt");
+            return getTopPlayer(convertToStatistic(formattedPlaceholder)).getValue().toString();
         }
 
-        if (placeholder.equalsIgnoreCase("kills_amt")) {
-            return getTopPlayer(Statistic.PLAYER_KILLS).getValue().toString();
-        }
-
-        if (placeholder.equalsIgnoreCase("deaths_amt")) {
-            return getTopPlayer(Statistic.DEATHS).getValue().toString();
-        }
+        if (convertToStatistic(formattedPlaceholder) == null) return "NULL PLACEHOLDER";
 
         return null;
     }
@@ -62,6 +64,14 @@ public class SMPStatsExpansion extends PlaceholderExpansion {
         }
 
         return maxEntry;
+    }
+
+    private Statistic convertToStatistic(String statString) {
+        final Optional<Statistic> convertedStat = Enums.getIfPresent(Statistic.class, statString.toUpperCase());
+
+        if(!convertedStat.isPresent()) return null;
+
+        return convertedStat.get();
     }
 
 }
