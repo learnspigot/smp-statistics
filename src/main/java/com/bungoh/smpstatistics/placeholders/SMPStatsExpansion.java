@@ -33,21 +33,28 @@ public class SMPStatsExpansion extends PlaceholderExpansion {
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String placeholder) {
 
-        String formattedPlaceholder = null;
+        String formattedPlaceholder;
+        Statistic convertedStat;
 
         if (placeholder.contains("_player")) {
             formattedPlaceholder = StringUtils.substringBefore(placeholder, "_player");
+            convertedStat = convertToStatistic(formattedPlaceholder);
+
+            if (convertedStat == null) return "NULL";
             return getTopPlayer(convertToStatistic(formattedPlaceholder)).getKey().getName();
         }
 
         if (placeholder.contains("_amt")) {
             formattedPlaceholder = StringUtils.substringBefore(placeholder, "_amt");
+            convertedStat = convertToStatistic(formattedPlaceholder);
+
+            if (convertedStat == null) return "NULL";
+
             return getTopPlayer(convertToStatistic(formattedPlaceholder)).getValue().toString();
         }
 
-        if (convertToStatistic(formattedPlaceholder) == null) return "NULL PLACEHOLDER";
+        return "NULL PLACEHOLDER";
 
-        return null;
     }
 
     private Map.Entry<OfflinePlayer, Integer> getTopPlayer(Statistic statistic) {
