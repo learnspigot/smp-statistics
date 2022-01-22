@@ -1,11 +1,11 @@
 package com.learnspigot.smp.statistics;
 
-import com.learnspigot.smp.statistics.placeholders.SMPStatsExpansion;
+import com.learnspigot.smp.statistics.expansion.StatisticsExpansion;
+import com.learnspigot.smp.statistics.statistic.StatisticHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SMPStatistics extends JavaPlugin {
-
     @Override
     public void onEnable() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
@@ -14,11 +14,6 @@ public final class SMPStatistics extends JavaPlugin {
             return;
         }
 
-        new SMPStatsExpansion().register();
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+        new StatisticsExpansion(new StatisticHandler()).register();
     }
 }
