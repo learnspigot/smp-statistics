@@ -1,6 +1,7 @@
 package com.learnspigot.smp.statistics.statistic;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -12,14 +13,23 @@ public enum Statistic {
     TIME_PLAYED(org.bukkit.Statistic.PLAY_ONE_MINUTE),
     OTHER(null);
 
-    private final org.bukkit.Statistic bukkitStatistic;
+    private org.bukkit.Statistic bukkitStatistic;
 
-    Statistic(final @NotNull org.bukkit.Statistic bukkitStatistic) {
+    Statistic(final @Nullable org.bukkit.Statistic bukkitStatistic) {
         this.bukkitStatistic = bukkitStatistic;
     }
 
-    public @NotNull org.bukkit.Statistic bukkitStatistic() {
+    public @Nullable org.bukkit.Statistic bukkitStatistic() {
         return bukkitStatistic;
+    }
+
+    public @NotNull Statistic bukkitStatistic(final @NotNull String bukkitStatistic) {
+        try {
+            this.bukkitStatistic = org.bukkit.Statistic.valueOf(bukkitStatistic.toUpperCase());
+        } catch (IllegalArgumentException ignored) {
+            System.out.println("UNRECOGNISED");
+        }
+        return this;
     }
 
     public @NotNull String convert(final int value) {
@@ -37,6 +47,11 @@ public enum Statistic {
     }
 
     public static @NotNull Optional<Statistic> fromString(final @NotNull String string) {
-        return Optional.of(valueOf(string.toUpperCase()));
+        System.out.println("substring: " + string);
+        try {
+            return Optional.of(valueOf(string.toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 }

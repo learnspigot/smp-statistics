@@ -6,7 +6,7 @@
 
     <groupId>com.bungoh</groupId>
     <artifactId>SMPStatistics</artifactId>
-    <version>1.0</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <name>SMPStatistics</name>
@@ -80,11 +80,6 @@
             <artifactId>placeholderapi</artifactId>
             <version>2.11.1</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
         </dependency>
     </dependencies>
 </project>

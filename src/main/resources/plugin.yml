@@ -1,6 +1,8 @@
 name: SMPStatistics
 version: '${project.version}'
-main: com.bungoh.smpstatistics.SMPStatistics
+main: com.learnspigot.smp.statistics.SMPStatistics
 api-version: 1.18
-authors: [ Bungoh ]
+authors: ["Bungoh", "Reece", "Devous"]
 description: Statistics tracker for LearnSpigot SMP
+depend:
+  - "PlaceholderAPI"
