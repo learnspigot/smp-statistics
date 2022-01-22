@@ -8,7 +8,6 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 public final class StatisticsExpansion extends PlaceholderExpansion {
@@ -35,11 +34,8 @@ public final class StatisticsExpansion extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onRequest(final @NotNull OfflinePlayer player, final @NotNull String placeholder) {
-        System.out.println("1: " + placeholder);
         boolean b = placeholder.endsWith("_player");
         int i = b ? placeholder.length() - 7 : placeholder.length() - 4;
-
-        System.out.println("2: " + b + " " + i);
 
         Optional<Statistic> statistic = Statistic.fromString(placeholder.substring(0, i));
         if (statistic.isPresent()) {

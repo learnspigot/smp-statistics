@@ -1,5 +1,6 @@
 package com.learnspigot.smp.statistics.statistic;
 
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,7 +28,7 @@ public enum Statistic {
         try {
             this.bukkitStatistic = org.bukkit.Statistic.valueOf(bukkitStatistic.toUpperCase());
         } catch (IllegalArgumentException ignored) {
-            System.out.println("UNRECOGNISED");
+            Bukkit.getLogger().warning("Unknown statistic parsed: " + bukkitStatistic.toUpperCase());
         }
         return this;
     }
@@ -47,7 +48,6 @@ public enum Statistic {
     }
 
     public static @NotNull Optional<Statistic> fromString(final @NotNull String string) {
-        System.out.println("substring: " + string);
         try {
             return Optional.of(valueOf(string.toUpperCase()));
         } catch (IllegalArgumentException e) {
