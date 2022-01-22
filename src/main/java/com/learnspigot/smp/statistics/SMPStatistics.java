@@ -1,6 +1,6 @@
-package com.bungoh.smpstatistics;
+package com.learnspigot.smp.statistics;
 
-import com.bungoh.smpstatistics.placeholders.SMPStatsExpansion;
+import com.learnspigot.smp.statistics.placeholders.SMPStatsExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 

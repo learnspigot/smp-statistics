@@ -1,4 +1,4 @@
-package com.bungoh.smpstatistics.placeholders;
+package com.learnspigot.smp.statistics.placeholders;
 
 import com.google.common.base.Enums;
 import com.google.common.base.Optional;
